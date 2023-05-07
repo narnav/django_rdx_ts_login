@@ -8,9 +8,12 @@ export interface loginState {
 }
 
 const initialState: loginState = {
-    logged: false,
-    token: ''
+    logged: !!sessionStorage.getItem('token') ||false,
+    token: sessionStorage.getItem('token')||""
 };
+
+
+
 
 export const loginAsync = createAsyncThunk(
     'login/login',
@@ -45,7 +48,7 @@ export const loginSlice = createSlice({
             state.logged=false
             state.token =""
             sessionStorage.clear()
-        },
+        }
     },
     extraReducers: (builder) => {
         builder

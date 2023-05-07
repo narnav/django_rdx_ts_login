@@ -8,7 +8,8 @@ const Login = () => {
     const [username, setusername] = useState("")
     const [password, setpassword] = useState("")
     return (
-        <div>
+        <div style={{backgroundColor:"red"}}>
+            <h1>Login</h1>
             User name<input onChange={(e)=>setusername(e.target.value)}/>
             Password<input onChange={(e)=>setpassword(e.target.value)}/>
             {logged ? <button onClick={() => dispatch(logout())}>Logout</button> :
