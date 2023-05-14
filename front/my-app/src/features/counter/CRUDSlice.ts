@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { Product } from '../../Models/Product';
-import {getAll,add,deleteProd } from './CRUDAPI';
+import {getAll,add,deleteProd,upd } from './CRUDAPI';
 
 export interface loginState {
     logged: boolean,
-    products:Product[]    
+    products:Product[],
 }
 
 const initialState: loginState = {
@@ -38,10 +38,10 @@ export const addAsync = createAsyncThunk(
     }
 );
 export const updAsync = createAsyncThunk(
-    'CRUD/add',
+    'CRUD/upd',
     async (product:Product) => {
-        console.log("addddd");
-        const response = await add(product);
+        // console.log(product);
+        const response = await upd(product);
         return response.data;
     }
 );
@@ -51,7 +51,6 @@ export const CRUDSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.logged=false
-           
             sessionStorage.clear()
         },
     },
@@ -66,6 +65,9 @@ export const CRUDSlice = createSlice({
             }).addCase(delAsync.fulfilled, (state, action) => {
                 console.log(action.payload);
                  state.products= state.products.filter(pro => pro.id != action.payload)
+            }).addCase(updAsync.fulfilled, (state, action) => {
+                const current= state.products.findIndex(pro => pro.id == action.payload.id)
+                state.products[current]=action.payload
             })
     },
 });

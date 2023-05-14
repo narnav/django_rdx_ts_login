@@ -21,3 +21,9 @@ export function deleteProd(productId:number) {
         axios.delete(`http://127.0.0.1:8000/product/${productId}`).then(res => resolve({ data: res.data }))
     );
 }
+export function upd(product:Product) {
+    // console.log("upd API");
+    return new Promise<{ data: Product }>((resolve) =>
+        axios.put(`http://127.0.0.1:8000/product/${product.id}`,product).then(res => resolve({ data: res.data }))
+    );
+}

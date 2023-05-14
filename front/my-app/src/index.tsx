@@ -5,14 +5,27 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-
+import {
+    BrowserRouter,
+    Routes,
+    Route,Link
+  } from "react-router-dom";
+import Cars from './Cars';
+import Students from './Students';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} >
+      <Route path="/cars" element={<Cars />} />
+      <Route path="/students" element={<Students />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

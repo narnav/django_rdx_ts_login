@@ -7,19 +7,22 @@ import Register from './features/counter/Register';
 import CRUD from './features/counter/CRUD';
 import {selectLogged} from './features/counter/loginSlice'
 import { useAppSelector, useAppDispatch } from './app/hooks';
+import MyNavbar from './MyNavbar';
+import { Outlet } from 'react-router-dom';
 function App() {
     const logged = useAppSelector(selectLogged);
   return (
-    <div className="App">
-      <header className="App-header">
-        <Login></Login>
-        <hr/>
-        <hr/>
-        <hr/>
-        {logged ? <CRUD></CRUD>:<Register></Register>}
+    <div className="App " style={{display: "flex"}}>
+      <div style={{width: "25%"}}>Left
+      <Login></Login><br></br>
+      <MyNavbar></MyNavbar> </div>
+      <div style={{width: "75%"}}>
+        
+        <Outlet></Outlet>
+        {logged ? <CRUD></CRUD>:<Register></Register>}</div>
+        
         
        
-      </header>
     </div>
   );
 }
